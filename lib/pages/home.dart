@@ -8,7 +8,10 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Flutter tut'),
       ),
-      body: ProductManager(initialProduct: 'Food Tester'),
+      body: ProductManager(initialProduct: {
+        'title': 'Food Tester',
+        'imageUrl': 'images/lake.jpg'
+      }),
     );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
+  final String title;
+  final String imageUrl;
+
+  ProductPage(this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext ctx) {
@@ -12,8 +16,8 @@ class ProductPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('images/lake.jpg'),
-            Text('Lake'),
+            Image.asset(imageUrl),
+            Text(title),
             Container(
               margin: EdgeInsets.all(10.0),
               child: RaisedButton(

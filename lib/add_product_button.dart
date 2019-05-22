@@ -11,7 +11,9 @@ class AddProductButton extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: RaisedButton(
         color: Theme.of(context).primaryColor,
-        onPressed: () { add('Laky'); },
+        onPressed: () {
+          add({'title': 'Lakky', 'imageUrl': 'images/lake.jpg'});
+        },
         child: Text('Add Product'),
       ),
     );

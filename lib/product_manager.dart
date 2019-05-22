@@ -5,21 +5,21 @@ import 'add_product_button.dart';
 class ProductManager extends StatefulWidget {
   ProductManager({this.initialProduct});
 
-  final String initialProduct;
+  final Map initialProduct;
 
   @override
   _ProductManagerState createState() => _ProductManagerState();
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map> _products = [];
 
   void initState() {
     _products.add(widget.initialProduct);
     super.initState();
   }
 
-  void _addProduct(String product) {
+  void _addProduct(Map product) {
     setState(() => {_products.add(product)});
   }
 
