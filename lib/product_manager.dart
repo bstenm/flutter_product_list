@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'products.dart';
+import 'product_list.dart';
 import 'add_product_button.dart';
 
 class ProductManager extends StatefulWidget {
@@ -23,6 +23,10 @@ class _ProductManagerState extends State<ProductManager> {
     setState(() => {_products.add(product)});
   }
 
+  void _deleteProduct(int index) {
+    setState(() => {_products.removeAt(index)});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -32,7 +36,11 @@ class _ProductManagerState extends State<ProductManager> {
             margin: EdgeInsets.all(8.0),
             child: AddProductButton(_addProduct),
           ),
-          Expanded(child: Products(_products)),
+          Expanded(
+              child: Products(
+            _products,
+            deleteProduct: _deleteProduct,
+          )),
         ],
       ),
     );

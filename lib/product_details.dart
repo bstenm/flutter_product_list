@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductDetails extends StatelessWidget {
   final String title;
   final String imageUrl;
 
-  ProductPage(this.title, this.imageUrl);
+  ProductDetails(this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext ctx) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Product Details'),
-      ),
-      body: Center(
+    return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -22,13 +18,12 @@ class ProductPage extends StatelessWidget {
               margin: EdgeInsets.all(10.0),
               child: RaisedButton(
                 color: Theme.of(ctx).accentColor,
-                child: Text('Back'),
-                onPressed: () => Navigator.pop(ctx),
+                child: Text('DELETE'),
+                onPressed: () => Navigator.pop(ctx, true),
               ),
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }
