@@ -9,21 +9,41 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(imageUrl),
-            Text(title),
-            Container(
-              margin: EdgeInsets.all(10.0),
-              child: RaisedButton(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(imageUrl),
+          Text(title),
+          Container(
+            margin: EdgeInsets.all(10.0),
+            child: RaisedButton(
                 color: Theme.of(ctx).accentColor,
                 child: Text('DELETE'),
-                onPressed: () => Navigator.pop(ctx, true),
-              ),
-            )
-          ],
-        ),
-      );
+                onPressed: () {
+                  return showDialog(
+                    context: ctx,
+                    builder: (_) {
+                      return AlertDialog(
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('CANCEL'),
+                            onPressed: () => Navigator.pop(ctx),
+                          ),
+                          FlatButton(
+                            child: Text('CONTINUE'),
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                              Navigator.pop(ctx, true);
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/blocs/bloc_provider.dart';
+import 'package:myapp/blocs/products_bloc.dart';
 import '../product_manager.dart';
 
 class ProductManagerPage extends StatelessWidget {
@@ -22,10 +24,10 @@ class ProductManagerPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Product Manager'),
       ),
-      body: ProductManager(initialProduct: {
-        'title': 'Food Tester',
-        'imageUrl': 'images/lake.jpg'
-      }),
+      body: BlocProvider(
+        bloc: ProductsBloc(),
+        child: ProductManager(),
+      ),
     );
   }
 }

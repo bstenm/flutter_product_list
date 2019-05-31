@@ -1,47 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/blocs/bloc_provider.dart';
 import 'product_list.dart';
 import 'add_product_button.dart';
+import 'blocs/products_bloc.dart';
 
 class ProductManager extends StatefulWidget {
-  ProductManager({this.initialProduct});
-
-  final Map initialProduct;
+  ProductManager();
 
   @override
   _ProductManagerState createState() => _ProductManagerState();
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<Map> _products = [];
-
-  void initState() {
-    _products.add(widget.initialProduct);
-    super.initState();
-  }
-
-  void _addProduct(Map product) {
-    setState(() => {_products.add(product)});
-  }
-
-  void _deleteProduct(int index) {
-    setState(() => {_products.removeAt(index)});
-  }
 
   @override
   Widget build(BuildContext context) {
+    ProductsBloc productsBloc = BlocProvider.of<ProductsBloc>(context);
+
     return Center(
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(8.0),
-            child: AddProductButton(_addProduct),
-          ),
-          Expanded(
-              child: Products(
-            _products,
-            deleteProduct: _deleteProduct,
-          )),
+      child: StreamBuilder(
+        stream: productsBloc.outStream,
+        initialData: [
+          {'title': 'Food Tester', 'imageUrl': 'images/lake.jpg'}
         ],
+        builder: (_, snapshot) => Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(8.0),
+                  child: AddProductButton(productsBloc.addProduct),
+                ),
+                Expanded(
+                  child: Products(
+                    snapshot.data,
+                    deleteProduct: () {},
+                  ),
+                ),
+              ],
+            ),
       ),
     );
   }
