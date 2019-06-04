@@ -1,42 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/blocs/bloc_provider.dart';
-import 'product_list.dart';
+import 'package:myapp/product_list.dart';
+import 'package:myapp/state/products_bloc.dart';
 import 'add_product_button.dart';
-import 'blocs/products_bloc.dart';
+import 'package:provider/provider.dart';
 
-class ProductManager extends StatefulWidget {
-  ProductManager();
-
-  @override
-  _ProductManagerState createState() => _ProductManagerState();
-}
-
-class _ProductManagerState extends State<ProductManager> {
-
+class ProductManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ProductsBloc productsBloc = BlocProvider.of<ProductsBloc>(context);
+    ProductsBloc productsBloc = Provider.of<ProductsBloc>(context);
 
     return Center(
-      child: StreamBuilder(
-        stream: productsBloc.outStream,
-        initialData: [
-          {'title': 'Food Tester', 'imageUrl': 'images/lake.jpg'}
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(8.0),
+            child: AddProductButton(productsBloc.addProduct),
+          ),
+          Expanded(
+            child: ProductList(productsBloc.products, productsBloc.deleteProduct),
+          ),
         ],
-        builder: (_, snapshot) => Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(8.0),
-                  child: AddProductButton(productsBloc.addProduct),
-                ),
-                Expanded(
-                  child: Products(
-                    snapshot.data,
-                    deleteProduct: () {},
-                  ),
-                ),
-              ],
-            ),
       ),
     );
   }

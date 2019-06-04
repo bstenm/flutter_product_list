@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/blocs/bloc_provider.dart';
-import 'package:myapp/blocs/products_bloc.dart';
-import '../product_manager.dart';
+import 'package:myapp/state/products_bloc.dart';
+import 'package:myapp/product_manager.dart';
+import 'package:provider/provider.dart';
 
 class ProductManagerPage extends StatelessWidget {
   @override
@@ -24,8 +24,8 @@ class ProductManagerPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Product Manager'),
       ),
-      body: BlocProvider(
-        bloc: ProductsBloc(),
+      body: ChangeNotifierProvider(
+        builder: (_) => ProductsBloc(),
         child: ProductManager(),
       ),
     );

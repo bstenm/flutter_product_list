@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddProductButton extends StatelessWidget {
-  AddProductButton(this.add);
+  final Function addProduct;
 
-  final Function add;
+  AddProductButton(this.addProduct);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class AddProductButton extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: RaisedButton(
         color: Theme.of(context).primaryColor,
-        onPressed: add,
+        onPressed: () => addProduct(),
         child: Text('Add Product'),
       ),
     );
